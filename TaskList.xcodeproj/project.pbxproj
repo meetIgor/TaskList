@@ -58,12 +58,12 @@
 		A8B9AC9228B29E680069665A /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				AD136AF228B646B400E5B7A0 /* Models */,
 				AD136AEE28B519F700E5B7A0 /* App */,
 				AD136AF028B51A2400E5B7A0 /* ViewControllers */,
 				AD136AF128B51A2F00E5B7A0 /* Services */,
 				AD136AEF28B51A1600E5B7A0 /* Resources */,
 				AD136AED28B519E500E5B7A0 /* Storyboards */,
-				A8B9AC9C28B29E680069665A /* TaskList.xcdatamodeld */,
 			);
 			path = TaskList;
 			sourceTree = "<group>";
@@ -108,6 +108,14 @@
 				AD136AEB28B4B0DC00E5B7A0 /* StorageManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		AD136AF228B646B400E5B7A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A8B9AC9C28B29E680069665A /* TaskList.xcdatamodeld */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

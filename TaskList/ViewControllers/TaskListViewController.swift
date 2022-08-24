@@ -2,7 +2,7 @@
 //  TaskListViewController.swift
 //  TaskList
 //
-//  Created by Alexey Efimov on 21.08.2022.
+//  Created by igor popov on 23.08.2022.
 //
 
 import UIKit
@@ -57,7 +57,7 @@ class TaskListViewController: UITableViewController {
     }
     
     private func fetchData() {
-        StorageManager.shared.fetchDatas { [ unowned self ] result in
+        StorageManager.shared.fetchData { [ unowned self ] result in
             switch result {
             case .success(let taskList):
                 self.taskList = taskList
@@ -68,17 +68,12 @@ class TaskListViewController: UITableViewController {
     }
     
     private func save(taskName: String) {
-        StorageManager.shared.save(title: taskName) { [ unowned self ] result in
-            switch result {
-            case .success(let task):
-                self.taskList.append(task)
-                self.tableView.insertRows(
-                    at: [IndexPath(row: self.taskList.count - 1, section: 0)],
-                    with: .automatic
-                )
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+        StorageManager.shared.save(title: taskName) { [ unowned self ] task in
+            self.taskList.append(task)
+            self.tableView.insertRows(
+                at: [IndexPath(row: self.taskList.count - 1, section: 0)],
+                with: .automatic
+            )
         }
     }
     

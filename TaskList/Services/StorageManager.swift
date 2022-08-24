@@ -23,15 +23,12 @@ class StorageManager {
         return container
     }()
     
-    private lazy var context: NSManagedObjectContext = {
-        return persistentContainer.viewContext
-    }()
+    private var context: NSManagedObjectContext { persistentContainer.viewContext }
     
     private init () {}
     
     // MARK: - Core Data Saving support
     func saveContext() {
-        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -42,51 +39,31 @@ class StorageManager {
         }
     }
     
-    func fetchDatas(completion: (Result<[Task], Error>) -> Void) {
+    func fetchData(completion: (Result<[Task], Error>) -> Void) {
         let fetchRequest = Task.fetchRequest()
-        var taskList: [Task] = []
         do {
-            taskList = try context.fetch(fetchRequest)
-            if !taskList.isEmpty {
-                completion(.success(taskList))
-            }
+            let taskList = try context.fetch(fetchRequest)
+            completion(.success(taskList))
         } catch {
             completion(.failure(error))
         }
     }
     
-    func save(title: String, completion: (Result<Task, Error>) -> Void) {
+    func save(title: String, completion: (Task) -> Void) {
         let task = Task(context: context)
         task.title = title
-        if context.hasChanges {
-            do {
-                try context.save()
-                completion(.success(task))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-        
+        completion(task)
+        saveContext()
     }
     
     func delete(object: Task) {
         context.delete(object)
-        checkContextChanges()
+        saveContext()
     }
     
     func update(task: Task, newTitle: String) {
         task.title = newTitle
-        checkContextChanges()
-    }
-    
-    private func checkContextChanges() {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch let error {
-                print(error)
-            }
-        }
+        saveContext()
     }
     
 }
