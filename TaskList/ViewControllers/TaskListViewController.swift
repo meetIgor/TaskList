@@ -132,7 +132,6 @@ extension TaskListViewController {
                 self?.save(taskName: taskName)
             }
         }
-        
         present(alert, animated: true)
     }
 }
