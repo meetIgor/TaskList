@@ -14,6 +14,7 @@
 		A8B9ACA028B29E680069665A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8B9AC9F28B29E680069665A /* Assets.xcassets */; };
 		A8B9ACA328B29E680069665A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8B9ACA128B29E680069665A /* LaunchScreen.storyboard */; };
 		AD136AEC28B4B0DC00E5B7A0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD136AEB28B4B0DC00E5B7A0 /* StorageManager.swift */; };
+		AD136AF528B78CFD00E5B7A0 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD136AF428B78CFD00E5B7A0 /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A8B9ACA228B29E680069665A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8B9ACA428B29E680069665A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD136AEB28B4B0DC00E5B7A0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		AD136AF428B78CFD00E5B7A0 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		A8B9AC9228B29E680069665A /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				AD136AF328B78CDD00E5B7A0 /* Extensions */,
 				AD136AF228B646B400E5B7A0 /* Models */,
 				AD136AEE28B519F700E5B7A0 /* App */,
 				AD136AF028B51A2400E5B7A0 /* ViewControllers */,
@@ -116,6 +119,14 @@
 				A8B9AC9C28B29E680069665A /* TaskList.xcdatamodeld */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AD136AF328B78CDD00E5B7A0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AD136AF428B78CFD00E5B7A0 /* AlertController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +203,7 @@
 				A8B9AC9828B29E680069665A /* TaskListViewController.swift in Sources */,
 				AD136AEC28B4B0DC00E5B7A0 /* StorageManager.swift in Sources */,
 				A8B9AC9428B29E680069665A /* AppDelegate.swift in Sources */,
+				AD136AF528B78CFD00E5B7A0 /* AlertController.swift in Sources */,
 				A8B9AC9628B29E680069665A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,7 +5,6 @@
 //  Created by igor s on 23.08.2022.
 //
 
-import Foundation
 import CoreData
 
 class StorageManager {
@@ -23,20 +22,10 @@ class StorageManager {
         return container
     }()
     
-    private var context: NSManagedObjectContext { persistentContainer.viewContext }
+    private let context: NSManagedObjectContext
     
-    private init () {}
-    
-    // MARK: - Core Data Saving support
-    func saveContext() {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
+    private init () {
+        context = persistentContainer.viewContext
     }
     
     func fetchData(completion: (Result<[Task], Error>) -> Void) {
@@ -49,7 +38,7 @@ class StorageManager {
         }
     }
     
-    func save(title: String, completion: (Task) -> Void) {
+    func create(title: String, completion: (Task) -> Void) {
         let task = Task(context: context)
         task.title = title
         completion(task)
@@ -66,4 +55,15 @@ class StorageManager {
         saveContext()
     }
     
+    // MARK: - Core Data Saving support
+    func saveContext() {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
 }

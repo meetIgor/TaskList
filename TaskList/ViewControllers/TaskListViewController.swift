@@ -68,7 +68,7 @@ class TaskListViewController: UITableViewController {
     }
     
     private func save(taskName: String) {
-        StorageManager.shared.save(title: taskName) { [ unowned self ] task in
+        StorageManager.shared.create(title: taskName) { [ unowned self ] task in
             self.taskList.append(task)
             self.tableView.insertRows(
                 at: [IndexPath(row: self.taskList.count - 1, section: 0)],
@@ -96,6 +96,7 @@ extension TaskListViewController {
         return cell
     }
     
+    //Delete task
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let task = taskList.remove(at: indexPath.row)
@@ -104,6 +105,7 @@ extension TaskListViewController {
         }
     }
     
+    //Edit task
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let task = taskList[indexPath.row]
@@ -120,31 +122,16 @@ extension TaskListViewController {
     private func showAlert(task: Task? = nil, completion: (() -> Void)? = nil) {
         let title = task != nil ? "Update task" : "New task"
         
-        let alert = UIAlertController(
-            title: title,
-            message: "What do you want to do?",
-            preferredStyle: .alert
-        )
+        let alert = UIAlertController.createAlert(withTitle: title)
         
-        alert.addTextField { textField in
-            textField.placeholder = "New Task"
-            if task != nil {
-                textField.text = task?.title
-            }
-        }
-        
-        let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] _ in
-            guard let newName = alert.textFields?.first?.text, !newName.isEmpty else { return }
+        alert.action(task: task) { [weak self] taskName in
             if let task = task, let completion = completion {
-                StorageManager.shared.update(task: task, newTitle: newName)
+                StorageManager.shared.update(task: task, newTitle: taskName)
                 completion()
             } else {
-                save(taskName: newName)
+                self?.save(taskName: taskName)
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
         
         present(alert, animated: true)
     }
